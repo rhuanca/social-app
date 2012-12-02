@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html>
+<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../js/jsrender.js"></script>
+
+<script id="template" type="text/x-jsrender">
+	<tr>
+		<td>{{>conflicto.id}}</td>
+		<td>{{>conflicto.actorDemandante}}</td>
+		<td>{{>conflicto.actorDemandado}}</td>
+		<td>{{>conflicto.hora}}</td>
+		<td>{{>conflicto.lugar}}</td>
+	</tr>
+</script>
+
+<script type="text/javascript">
+	function testHelloWorld() {
+		$.get('/rest/test/hello', function(data) {
+			$('#div1').html(data);
+		});
+	}
+
+	function testJson() {
+		$.ajax({
+			type : 'POST',
+			url : '/rest/test/json',
+
+			//dataType: "json",
+			contentType : "application/json; charset=utf-8",
+			success : function(data) {
+				$('#div2').html('data.property1 = ' + data.property1);
+			},
+			error : function(xhr) {
+				alert(xhr.status);
+			}
+		});
+	}
+
+	function testCount() {
+		$.get('/rest/test/count', function(data) {
+			$('#div3').html(data);
+		});
+	}
+	
+	function testCountRutaHitos() {
+		//$.get('/rest/conflicts/listRutaHitos', function(data) {
+		//	$('#div6').html(data.length);
+		//});
+		
+		$.ajax({
+			type : 'POST',
+			url : '/rest/conflicts/listRutaHitos',
+
+			//dataType: "json",
+			contentType : "application/json; charset=utf-8",
+			success : function(data) {
+				$('#div6').html(data.length);
+			},
+			error : function(xhr) {
+				alert(xhr.status);
+			}
+		});
+	}
+	
+	
+	
+	function testList() {
+		$.ajax({
+			type : 'POST',
+			url : '/rest/test/list',
+
+			//dataType: "json",
+			contentType : "application/json; charset=utf-8",
+			success : function(data) {
+				$('#list').html($('#template').render(data));
+			},
+			error : function(xhr) {
+				alert(xhr.status);
+			}
+		});
+	}
+
+	function checkHeartbeat() {
+		$.get('/heartbeat', function(data) {
+			$('#heartbeat').append(data+"<br/>");
+		});
+	}
+
+	$(document).ready(function() {
+		checkHeartbeat();
+		window.setInterval(checkHeartbeat, 30000);
+	});
+</script>
+<body>
+	<button onclick="testHelloWorld()">Test Hello World</button>
+	<div id="div1"></div>
+	<button onclick="testJson()">Test Json</button>
+	<div id="div2"></div>
+
+	<button onclick="testCount()">Test Count (Conflicto records)</button>
+	<div id="div3"></div>
+	
+	<button onclick="testCountRutaHitos()">Test Count (Ruta Hitos)</button>
+	<div id="div4">
+		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Demandante</th>
+					<th>Demandado</th>
+					<th>Hora</th>
+					<th>Lugar</th>
+				</tr>
+			</thead>
+			<tbody id="list"></tbody>
+		</table>
+	</div>
+
+	<button onclick="testCountRutaHitos()">Test Count (RutaHitos)</button>
+	<div id="div6"></div>
+	
+	<b>Heart Beat</b>
+	<div id="heartbeat"></div>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,218 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Alerta Temprana</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/jquery-ui.min.css" rel="stylesheet">
+    <link href="./css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="./css/hardcodersStyle.css" rel="stylesheet">
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jsrender.js"></script>
+    <script type="text/javascript" src="js/map.js"></script>
+
+    <script id="treeTempl" type="text/x-jsrender">
+        <dl>
+            <dl style="text-align: center"><h2 class="text-error">{{>cityName}}</h2></dl>
+            {{for zones}}
+            <dt>
+            <p class="text-error">{{>zoneName}}</p></dt>
+            {{for points}}
+            <!--<blockquote>-->
+            <dd><a href="#" class="text-warning">{{>pointName}}</a></dd>
+            <!--</blockquote>-->
+            {{/for}}
+            {{/for}}
+        </dl>
+    </script>
+</head>
+
+<body>
+<div class="row">
+    <div class="span6">
+      <h1>Spacelab</h1>
+      <p class="lead">A preview of changes in this swatch.</p>
+    </div>
+    <div class="span6">
+      <div class="bsa well">
+          <div id="bsap_1277971" class="bsap_1277971 bsap"><div class="bsa_it one"><div class="bsa_it_ad ad1 odd" id="bsa_2916126"><a href="http://stats.buysellads.com/click.go?z=1277971&amp;b=2916126&amp;g=&amp;s=&amp;sw=1920&amp;sh=1200&amp;br=chrome,23,win&amp;r=0.26122370711527765&amp;link=http://newrelic.com/?utm_source=BSAD&amp;utm_medium=banner_ad&amp;utm_content=rpm&amp;utm_campaign=RPM&amp;utm_term=devbest&amp;mpc=BA-BSAD-RPM-EN-0-DevAdPack-devbest" onmouseover="window.status = 'http://newrelic.com/?utm_source=BSAD&amp;utm_medium=banner_ad&amp;utm_content=rpm&amp;utm_campaign=RPM&amp;utm_term=devbest&amp;mpc=BA-BSAD-RPM-EN-0-DevAdPack-devbest'; return true;" onmouseout="window.status=''; return true;" target="_blank"><span class="bsa_it_i"><img src="http://s3.buysellads.com/1255475/140347-1352833227.png" width="130" height="100" alt="New Relic is the answer"></span></a><a href="http://stats.buysellads.com/click.go?z=1277971&amp;b=2916126&amp;g=&amp;s=&amp;sw=1920&amp;sh=1200&amp;br=chrome,23,win&amp;r=0.43225556635297835&amp;link=http://newrelic.com/?utm_source=BSAD&amp;utm_medium=banner_ad&amp;utm_content=rpm&amp;utm_campaign=RPM&amp;utm_term=devbest&amp;mpc=BA-BSAD-RPM-EN-0-DevAdPack-devbest" onmouseover="window.status = 'http://newrelic.com/?utm_source=BSAD&amp;utm_medium=banner_ad&amp;utm_content=rpm&amp;utm_campaign=RPM&amp;utm_term=devbest&amp;mpc=BA-BSAD-RPM-EN-0-DevAdPack-devbest'; return true;" onmouseout="window.status=''; return true;" target="_blank"><span class="bsa_it_t">New Relic is the answer</span><span class="bsa_it_d">New Relic gives you complete visibility into your web app - from glass to metal</span></a><div style="clear:both"></div></div><span class="bsa_it_p"><a href="http://buysellads.com/buy/detail/149435/zone/1277971?utm_source=site_149435&amp;utm_medium=website&amp;utm_campaign=imagetext&amp;utm_content=zone_1277971">ads by BSA</a></span></div></div>
+          <div class="clearfix"><a href="http://adpacks.com" id="bsap_aplink">via Ad Packs</a></div>
+      </div>
+    </div>
+  </div>
+
+<div class="modal hide fade in" id="signup-modal" style="display: none">
+    <a class="close" data-dismiss="modal">×</a>
+
+    <h1>Ingrese con su cuenta</h1>
+
+    <form action="/signup" method="POST" autocomplete="off">
+        <div style="display:none"><input type="hidden" name="csrfmiddlewaretoken"
+                                         value="sE5xDFuLtWGNuJS9mQrAXV6rWPPFia9w"></div>
+        <fieldset>
+            <input type="hidden" name="next" value="/welcome/">
+
+            <input type="email" placeholder="Email" name="email" maxlength="75" id="id_email">
+
+            <div class="email_suggestion"></div>
+            <input type="password" placeholder="Contraseña" name="password" id="id_password">
+            <input type="submit" value="Sign Up" class="btn">
+        </fieldset>
+    </form>
+    <form class="connect-button" name="login" method="post" action="/social/twitter/redirect/"
+          id="twitter-connect-form">
+        <div style="display:none"><input type="hidden" name="csrfmiddlewaretoken"
+                                         value="sE5xDFuLtWGNuJS9mQrAXV6rWPPFia9w"></div>
+
+        <input type="hidden" name="next" value="/welcome/">
+
+        <a href="#" onclick="$('#twitter-connect-form').submit(); return false;" class="signup-twitter signup-btn"
+           id="twitter_button"><i></i>Ingresar con Twitter</a>
+    </form>
+
+    <form class="connect-button" name="login" method="post" action="/social/facebook/redirect/"
+          id="facebook-connect-form">
+        <div style="display:none"><input type="hidden" name="csrfmiddlewaretoken"
+                                         value="sE5xDFuLtWGNuJS9mQrAXV6rWPPFia9w"></div>
+
+        <input type="hidden" name="next" value="/welcome/">
+
+        <a href="#" onclick="$('#facebook-connect-form').submit(); return false;" class="signup-facebook signup-btn"
+           id="facebook_button"><i></i>Ingresar con Facebook</a>
+    </form>
+</div>
+
+<div class="container">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="container-fluid span12">
+
+                <form class="form-horizontal">
+                    <!--<ul class="nav nav-pills pull-right">-->
+                    <!--<li class="active"><a href="#">Home</a></li>-->
+                    <!--<li><a href="#">About</a></li>-->
+                    <!--<li><a href="#">Contact</a></li>-->
+                    <!--</ul>-->
+                    <div class="control-group pull-right">
+                        <a href="#reportConflictButtonId" role="button" class="btn btn-red" data-toggle="modal">Reporte
+                            un conflicto</a>
+                        <button type="button" class="btn pull-right" id="signupButton">Sign in</button>
+                        <br/>
+                        <small class="pull-right"><a href="/login/"><span>Si no tiene una cuenta entonces </span>Registrarse</a>
+                        </small>
+                    </div>
+
+                    <h3 class="muted">Informate Antes</h3>
+
+                </form>
+
+            </div>
+
+            <div class="row">
+                <div class="span6">
+                    <h1>Quien Bloquea</h1>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row-fluid span12">
+                    <div class="well sidebar-nav span4" id="tree">
+                        <!---->
+                    </div>
+
+                    <!-- Button to trigger modal -->
+
+                    <!-- Fiv for report Conflict -->
+                    <div id="reportConflictButtonId" class="modal hide fade" tabindex="-1" role="dialog"
+                         aria-labelledby="myModalLabel" aria-hidden="true">
+                        <form class="form-signin-heading">
+                            <div class="modal-header">
+                                <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+                                <h3 id="myModalLabel">Reportar Conflicto</h3>
+                            </div>
+                            <div class="modal-body">
+                                <label class="radio span6">
+                                    <input type="radio" name="conflictPoint" id="conflictPoint" value="point"
+                                           checked>
+                                    Seleccione Punto
+                                </label>
+                                <label class="radio span6">
+                                    <input type="radio" name="conflictPoint" id="conflictPath" value="path">
+                                    Seleccione Ruta
+                                </label>
+
+                                <div id="detectPoint">
+                                    <label class="span5 control-label">Punto Tradicionales de
+                                        bloqueo</label>
+                                    <select id="select2" class="chooseManualSelection span6" name="conflictPoint">
+                                    </select>
+
+                                    <label class="span5 control-label">Detalle del bloqueo</label>
+                                    <textarea rows="5" cols="10" id="detailConflict"></textarea>
+                                </div>
+
+                                <div class="span11">
+                                    <iframe width="525" height="450" frameborder="0" scrolling="no" marginheight="0"
+                                            marginwidth="0"
+                                            src="http://maps.google.es/?t=m&amp;ie=UTF8&amp;ll=-16.509174,-68.136864&amp;spn=0.188943,0.338173&amp;z=12&amp;output=embed"></iframe>
+                                    <br/>
+                                    <small><a
+                                            href="http://maps.google.es/?t=m&amp;ie=UTF8&amp;ll=-16.509174,-68.136864&amp;spn=0.188943,0.338173&amp;z=12&amp;source=embed"
+                                            style="color:#0000FF;text-align:left">Ver mapa más grande</a></small>
+                                </div>
+
+                                <div id="detectPath" style="display: none">
+                                    <label for="selectReportSource" class="span5 control-label">Origen</label>
+                                    <select id="selectReportSource" class="chooseManualSelection span6"
+                                            name="conflictPoint">
+                                    </select>
+
+                                    <label for="selectReportDestiny" class="span5 control-label">Destino</label>
+                                    <select id="selectReportDestiny" class="chooseManualSelection span6"
+                                            name="conflictPoint">
+                                    </select>
+
+                                    <label class="span5 control-label">Detalle del bloqueo</label>
+                                    <textarea rows="5" cols="10" id="detailConflictPath"></textarea>
+                                </div>
+
+                            </div>
+                        </form>
+                        <div class="modal-footer">
+                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                            <button class="btn btn-primary" id="saveReportConflict">Save changes</button>
+                        </div>
+                    </div>
+                    <div class="span8">
+                        <div>
+                            <iframe width="525" height="450" frameborder="0" scrolling="no" marginheight="0"
+                                    marginwidth="0"
+                                    src="http://maps.google.es/?t=m&amp;ie=UTF8&amp;ll=-16.509174,-68.136864&amp;spn=0.188943,0.338173&amp;z=12&amp;output=embed"></iframe>
+                            <br/>
+                            <small><a
+                                    href="http://maps.google.es/?t=m&amp;ie=UTF8&amp;ll=-16.509174,-68.136864&amp;spn=0.188943,0.338173&amp;z=12&amp;source=embed"
+                                    style="color:#0000FF;text-align:left">Ver mapa más grande</a></small>
+                        </div>
+                    </div>
+                    <!--/row-->
+                </div>
+                <!--/span-->
+            </div>
+            <!--/span-->
+        </div>
+    <!--/row-->
+
+    <footer>
+        <p>hackathon 2012</p>
+    </footer>
+</div>
+
+
+</body>
+</html>
