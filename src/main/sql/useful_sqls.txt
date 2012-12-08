@@ -1,2 +1,0 @@
-ALTER TABLE EDUCATION add id INT AUTO_INCREMENT PRIMARY KEY;
-alter table education add id int auto_increment primary key;
