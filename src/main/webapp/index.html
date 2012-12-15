@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:fb="http://ogp.me/ns/fb#" lang="en">
+<head>
+    <meta charset="utf-8"/>
+	<meta name="google-site-verification" content="NMRBtX6CmOkMAoQu8HQzP9PiMn71hhkybkhEsJxBTaU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes"/>
+
+    <title>Chenko diario - DAL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/curelean/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap/bootstrap-responsive.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap/docs.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap/prettify.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/app.css">
+
+
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbR1wk_eASdrJ7HjwiA4gnqW3CQa9pRK4&sensor=false"></script>
+    <script type="text/javascript" src="/javascript/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="/javascript/libs/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/javascript/libs/jsrender.js"></script>
+    <script type="text/javascript" src="/javascript/libs/jsrender.js"></script>
+    <script type="text/javascript" src="javascript/harcoders_utils.js"></script>
+    <script type="text/javascript" src="javascript/maps.js"></script>
+
+
+    <!-- Templates -->
+    <script id="summaryConflictTemplate" type="text/x-jsrender">
+        <dl>
+            <dl style="text-align: center;"><h2 class="text-error">{{>cityName}}</h2></dl>
+            {{for zones}}
+            <dt>
+                <div class="text-error">{{>zoneName}}</div>
+            </dt>
+            {{for points}}
+            <!--<blockquote>-->
+            <dd> - <a href="#" class="text-warning">{{>pointName}}</a></dd>
+            <!--</blockquote>-->
+            {{/for}}
+            {{/for}}
+        </dl>
+    </script>
+	</head>
+<body>
+  <div id="wrap" class="container" style="background-color: white;">
+    <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+            <div class="container" style="width: auto;">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="./index.html"><img alt="Ch'enkoDiario" style="height: 35px;" src="img/logo.png"></a>
+                <ul class="nav">
+                </ul>
+
+                <div class="nav-collapse collapse" style="height: 0px;">
+                    <ul class="nav pull-right">
+                        <li class="active"><a href="#">Mapa de Bloqueos</a></li>
+                        <li><a href="./chenkoForm.html">Reporta tu Bloqueo</a></li>
+                        <li><a href="./conflictPath.html">Crea tu ruta</a></li>
+                        <li><a href="#signUpId" data-toggle="modal">Ingresa</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <div id="main" class="container-fluid">
+        <div class="row-fluid">
+            <div class="span4">
+                <div class="span2">
+                    <div class="myDate">
+                    	<div id="conflictosCountDiv" class="day">0</div>
+                    </div>
+                </div>
+                <div class="span10" style="vertical-align: top;">
+                    <p style="padding-left: 12px; font-size: 12pt;">
+                        Bloqueos / Marchas <br/> <span id="conflictDate"></span>
+                    </p>
+                </div>
+            	<div class="span12" style="border-top: 1px; border-color: gray; border-top-style: solid; font-size: 13pt; font-family: sans-serif;">
+            		<br/>En este mapa, puede ver los puntos que están en conflicto en la ciudad de La Paz en este momento.
+            	</div>
+            	<div id="summary" class="span12">
+            	</div>
+                <!--here the conflict-->
+            </div>
+            <div class="span8">
+
+                <div id="map_canvas" style="width: 100%; height: 500px;"></div>
+            </div>
+        </div>
+    </div>
+    <div id="signUpId" class="container-fluid modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <form class="form-signin">
+            <h2 class="form-signin-heading">Indroduzca sus datos</h2>
+            <input type="text" class="input-block-level" placeholder="Email" id="mailId">
+            <input type="password" class="input-block-level" placeholder="Contraseña" id="passwordId">
+            <label class="checkbox">
+                <a href="#newUserDivId" id="registerDivId">Registrarse</a>
+            </label>
+            <button class="btn btn-large btn-primary" type="submit" id="registerId">Ingresar</button>
+            <button class="btn btn-large btn-navbar" id="signUpCloseId">Close</button>
+        </form>
+    </div>
+	<div id="newUserDivId" class="container-fluid hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <form class="form-signin">
+            <h2 class="form-signin-heading">Registre sus datos</h2>
+            <input type="text" class="input-block-level" placeholder="Email" id="newUserMailId">
+            <input type="password" class="input-block-level" placeholder="Contraseña" id="newUserPasswordId">
+            <button class="btn btn-large btn-primary" type="submit" id="registerUserId">Regitrarse</button>
+            <button class="btn btn-large btn-navbar" type="submit" id="closeUserId">Close</button>
+        </form>
+    </div>
+  </div>
+  <footer class="footer container" style="background-color:#c2c2c2; text-align: right; ">
+	    <img alt="" style="height: 40px;" src="img/dal2012-banner-01.png">
+	    <img alt="" style="height: 40px;" src="img/unirbolivia-banner.jpg">
+  </footer>
+
+</body>
+</html>
